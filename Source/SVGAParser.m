@@ -13,6 +13,8 @@
 #import <SSZipArchive/SSZipArchive.h>
 #import <CommonCrypto/CommonDigest.h>
 
+#define ZIP_MAGIC_NUMBER "PK"
+
 @interface SVGAParser ()
 
 @end
@@ -190,6 +192,14 @@ static NSOperationQueue *unzipQueue;
     [[NSFileManager defaultManager] removeItemAtPath:cacheDir error:NULL];
 }
 
++ (BOOL)isZIPData:(NSData *)data {
+    BOOL result = NO;
+    if (!strncmp([data bytes], ZIP_MAGIC_NUMBER, strlen(ZIP_MAGIC_NUMBER))) {
+        result = YES;
+    }
+    return result;
+}
+
 - (void)parseWithData:(nonnull NSData *)data
              cacheKey:(nonnull NSString *)cacheKey
       completionBlock:(void ( ^ _Nullable)(SVGAVideoEntity * _Nonnull videoItem))completionBlock
@@ -206,8 +216,7 @@ static NSOperationQueue *unzipQueue;
     if (!data || data.length < 4) {
         return;
     }
-    NSData *tag = [data subdataWithRange:NSMakeRange(0, 4)];
-    if (![[tag description] isEqualToString:@"<504b0304>"]) {
+    if (![SVGAParser isZIPData:data]) {
         // Maybe is SVGA 2.0.0
         [parseQueue addOperationWithBlock:^{
             NSData *inflateData = [self zlibInflate:data];

@@ -2,6 +2,12 @@
 
 [简体中文](./readme.zh.md)
 
+## 2.3.5 Released
+
+This version fixed SVGAPlayer `clearsAfterStop defaults too YES`, Please check your player when it doesn't need to be cleared.
+
+This version fixed SVGAPlayer render issue on iOS 13.1, upgrade to this version ASAP.
+
 ## Introduce
 
 SVGAPlayer is a light-weight animation renderer. You use [tools](http://svga.io/designer.html) to export `svga` file from `Adobe Animate CC` or `Adobe After Effects`, and then use SVGAPlayer to render animation on mobile application.

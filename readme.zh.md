@@ -1,5 +1,11 @@
 # SVGAPlayer
 
+## 2.3.5 版本
+
+该版本修正了 SVGAPlayer `clearsAfterStop 默认值为 YES`，请检查代码，修正不需要 clear 的 SVGAPlayer。
+
+该版本修正了 SVGAPlayer 无法在 iOS 13.1 上播放异常的问题，请尽快升级。
+
 ## 介绍
 
 `SVGAPlayer` 是一个轻量的动画渲染库。你可以使用[工具](http://svga.io/designer.html)从 `Adobe Animate CC` 或者 `Adobe After Effects` 中导出动画文件，然后使用 `SVGAPlayer` 在移动设备上渲染并播放。
